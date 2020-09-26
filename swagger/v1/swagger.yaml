@@ -3,7 +3,230 @@ openapi: 3.0.1
 info:
   title: API V1
   version: v1
-paths: {}
+paths:
+  "/mushrooms":
+    get:
+      summary: Lists mushrooms
+      tags:
+      - Mushrooms
+      description: Lists mushrooms
+      parameters: []
+      responses:
+        '200':
+          description: mushrooms listed
+          examples:
+            application/json:
+              mushrooms:
+              - capShape: bell
+                capSurface: scaly
+                capColor: brown
+                odor: anise
+                gillAttachment: attached
+                gillSpacing: close
+                gillSize: narrow
+                gillColor: brown
+                stalkShape: tapering
+                stalkRoot: club
+                stalkSurfaceAboveRing: scaly
+                stalkSurfaceBelowRing: smooth
+                stalkColorAboveRing: orange
+                stalkColorBelowRing: gray
+                veilType: universal
+                veilColor: white
+                ringNumber: none
+                ringType: large
+                sporePrintColor: green
+                population: several
+                habitat: leaves
+          content: {}
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                capShape:
+                  type: string
+                  enum:
+                  - bell
+                  - conical
+                  - convex
+                  - flat
+                  - knobbed
+                  - sunken
+                capSurface:
+                  type: string
+                  enum:
+                  - fibrous
+                  - grooves
+                  - scaly
+                  - smooth
+                capColor:
+                  type: string
+                  enum:
+                  - brown
+                  - buff
+                  - cinnamon
+                  - gray
+                  - green
+                  - pink
+                  - purple
+                  - red
+                  - white
+                  - yellow
+                odor:
+                  type: string
+                  enum:
+                  - almond
+                  - anise
+                  - creosote
+                  - fishy
+                  - foul
+                  - musty
+                  - none
+                  - pungent
+                  - spicy
+                gillAttachment:
+                  type: string
+                  enum:
+                  - attached
+                  - descending
+                  - free
+                  - notched
+                gillSpacing:
+                  type: string
+                  enum:
+                  - close
+                  - crowded
+                  - distant
+                gillSize:
+                  type: string
+                  enum:
+                  - broad
+                  - narrow
+                gillColor:
+                  type: string
+                  enum:
+                  - black
+                  - brown
+                  - buff
+                  - chocolate
+                  - gray
+                  - green
+                  - orange
+                  - pink
+                  - purple
+                  - red
+                  - white
+                  - yellow
+                stalkShape:
+                  type: string
+                  enum:
+                  - enlarging
+                  - tapering
+                stalkRoot:
+                  type: string
+                  enum:
+                  - bulbous
+                  - club
+                  - cup
+                  - equal
+                  - rhizomorphs
+                  - rooted
+                  - missing
+                stalkSurfaceAboveRing:
+                  type: string
+                  enum:
+                  - fibrous
+                  - scaly
+                  - silky
+                  - smooth
+                stalkSurfaceBelowRing:
+                  type: string
+                  enum:
+                  - fibrous
+                  - scaly
+                  - silky
+                  - smooth
+                stalkColorAboveRing:
+                  type: string
+                  enum:
+                  - fibrous
+                  - scaly
+                  - silky
+                  - smooth
+                stalkColorBelowRing:
+                  type: string
+                  enum:
+                  - brown
+                  - buff
+                  - cinnamon
+                  - gray
+                  - orange
+                  - pink
+                  - red
+                  - white
+                  - yellow
+                veilType:
+                  type: string
+                  enum:
+                  - partial
+                  - universal
+                veilColor:
+                  type: string
+                  enum:
+                  - brown
+                  - orange
+                  - white
+                  - yellow
+                ringNumber:
+                  type: string
+                  enum:
+                  - none
+                  - one
+                  - two
+                ringType:
+                  type: string
+                  enum:
+                  - cobwebby
+                  - evanescent
+                  - flaring
+                  - large
+                  - none
+                  - pendant
+                  - sheathing
+                  - zone
+                sporePrintColor:
+                  type: string
+                  enum:
+                  - black
+                  - brown
+                  - buff
+                  - chocolate
+                  - green
+                  - orange
+                  - purple
+                  - white
+                  - yellow
+                population:
+                  type: string
+                  enum:
+                  - abundant
+                  - clustered
+                  - numberous
+                  - scattered
+                  - several
+                  - solitary
+                habitat:
+                  type: string
+                  enum:
+                  - grasses
+                  - leaves
+                  - meadows
+                  - paths
+                  - urban
+                  - waste
+                  - woods
 servers:
 - url: http://{defaultHost}
   variables:
