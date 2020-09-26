@@ -40,10 +40,30 @@
               chips
               label="Search"
               multiple
-            ></v-autocomplete>
+              >
+              <template v-slot:selection="data">
+                <v-chip
+                  v-bind="data.attrs"
+                  :input-value="data.selected"
+                  close
+                  @click="data.select"
+                  @click:close="remove(data.item)"
+                  >
+                  {{ data.item }}
+                </v-chip>
+              </template>
+            </v-autocomplete>
+            <v-select v-model="selectedHeaders" :items="headers" label="Select Columns" multiple outlined return-object>
+              <template v-slot:selection="{ item, index }">
+                <v-chip v-if="index < 2">
+                  <span>{{ item.text }}</span>
+                </v-chip>
+                <span v-if="index === 2" class="grey--text caption">(+{{ selectedHeaders.length - 2 }} others)</span>
+              </template>
+            </v-select>
           </v-card-title>
           <v-data-table
-            :headers="headers"
+            :headers="selectedHeaders"
             :items="mushrooms"
             :options.sync="options"
             :server-items-length="count"
