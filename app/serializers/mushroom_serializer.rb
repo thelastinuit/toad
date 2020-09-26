@@ -3,10 +3,12 @@ module MushroomSerializer
 
   def parse(mushroom)
     {
+      category: mushroom.category,
       capShape: mushroom.cap_shape,
       capSurface: mushroom.cap_surface,
       capColor: mushroom.cap_color,
       odor: mushroom.odor,
+      bruises: mushroom.bruises,
       gillAttachment: mushroom.gill_attachment,
       gillSpacing: mushroom.gill_spacing,
       gillSize: mushroom.gill_size,

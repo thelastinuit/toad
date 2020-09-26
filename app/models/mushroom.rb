@@ -1,4 +1,9 @@
 class Mushroom < ApplicationRecord
+  enum category: { edible: 'e', 
+                   poisonous: 'p',
+                   },
+                    _suffix: true
+
   enum cap_shape: { bell: 'b',
                     conical: 'c',
                     convex: 'x',

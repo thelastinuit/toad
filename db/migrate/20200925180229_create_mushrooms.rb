@@ -1,6 +1,7 @@
 class CreateMushrooms < ActiveRecord::Migration[6.0]
   def up
     execute <<-SQL
+      CREATE TYPE mushroom_category AS ENUM ('p', 'e');
       CREATE TYPE mushroom_cap_shape AS ENUM ('b', 'c', 'x', 'f', 'k', 's');
       CREATE TYPE mushroom_cap_surface AS ENUM ('f', 'g', 'y', 's');
       CREATE TYPE mushroom_cap_color AS ENUM ('n', 'b', 'c', 'g', 'r', 'p', 'u', 'e', 'w', 'y');
@@ -25,10 +26,11 @@ class CreateMushrooms < ActiveRecord::Migration[6.0]
     SQL
 
     create_table :mushrooms, id: :uuid do |t|
-      t.boolean :brushes
+      t.boolean :bruises
       t.timestamps
     end
 
+    add_column :mushrooms, :category, :mushroom_category
     add_column :mushrooms, :cap_shape, :mushroom_cap_shape
     add_column :mushrooms, :cap_surface, :mushroom_cap_surface
     add_column :mushrooms, :cap_color, :mushroom_cap_color
@@ -50,6 +52,7 @@ class CreateMushrooms < ActiveRecord::Migration[6.0]
     add_column :mushrooms, :spore_print_color, :mushroom_spore_print_color
     add_column :mushrooms, :population, :mushroom_population
     add_column :mushrooms, :habitat, :mushroom_habitat
+    add_index :mushrooms, :category
     add_index :mushrooms, :cap_shape
     add_index :mushrooms, :cap_surface
     add_index :mushrooms, :cap_color
@@ -76,6 +79,7 @@ class CreateMushrooms < ActiveRecord::Migration[6.0]
   def down
     execute <<-SQL
       DROP TABLE mushrooms;
+      DROP TYPE mushroom_category;
       DROP TYPE mushroom_cap_shape;
       DROP TYPE mushroom_cap_surface;
       DROP TYPE mushroom_cap_color;

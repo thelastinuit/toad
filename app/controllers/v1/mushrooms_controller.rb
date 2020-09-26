@@ -16,7 +16,8 @@ module V1
       params
         .require(:mushroom)
         .permit(:id,
-                :brushes,
+                :category,
+                :bruises,
                 :capShape,
                 :capSurface,
                 :capColor,

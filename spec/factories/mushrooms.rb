@@ -1,9 +1,11 @@
 FactoryBot.define do
   factory :mushroom do
+    category { Mushroom.categories.keys.sample }
     cap_shape { Mushroom.cap_shapes.keys.sample }
     cap_surface { Mushroom.cap_surfaces.keys.sample }
     cap_color { Mushroom.cap_colors.keys.sample }
     odor { Mushroom.odors.keys.sample }
+    bruises { [true, false].sample }
     gill_attachment { Mushroom.gill_attachments.keys.sample }
     gill_spacing { Mushroom.gill_spacings.keys.sample }
     gill_size { Mushroom.gill_sizes.keys.sample }

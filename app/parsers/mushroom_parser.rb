@@ -3,10 +3,12 @@ module MushroomParser
 
   def call(params)
     {
+      category: params[:category],
       cap_shape: params[:capShape],
       cap_surface: params[:capSurface],
       cap_color: params[:capColor],
       odor: params[:odor],
+      bruises: params[:bruises],
       gill_attachment: params[:gillAttachment],
       gill_spacing: params[:gillSpacing],
       gill_size: params[:gillSize],

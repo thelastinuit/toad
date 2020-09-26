@@ -2,6 +2,19 @@ require 'rails_helper'
 
 describe Mushroom, type: :model do
   it {
+    should define_enum_for(:category)
+      .with_suffix
+      .with_values(edible: 'e', 
+                   poisonous: 'p')
+      .backed_by_column_of_type(:enum)
+  }
+
+  it {
+    should allow_values(:edible, :poisonous)
+      .for(:category)
+  }
+
+  it {
     should define_enum_for(:cap_shape)
       .with_suffix
       .with_values(bell: 'b',

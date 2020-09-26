@@ -33,6 +33,7 @@
         <img class="center" alt="Toad logo" src="logo.png" height="200" width="200" />
         <v-card>
           <v-card-title>
+            <v-spacer></v-spacer>
             <v-autocomplete
               v-model="values"
               :items="items"
@@ -53,6 +54,7 @@
                 </v-chip>
               </template>
             </v-autocomplete>
+            <v-spacer></v-spacer>
             <v-select v-model="selectedHeaders" :items="headers" label="Select Columns" multiple outlined return-object>
               <template v-slot:selection="{ item, index }">
                 <v-chip v-if="index < 2">
@@ -61,6 +63,7 @@
                 <span v-if="index === 2" class="grey--text caption">(+{{ selectedHeaders.length - 2 }} others)</span>
               </template>
             </v-select>
+            <v-spacer></v-spacer>
           </v-card-title>
           <v-data-table
             :headers="selectedHeaders"
@@ -78,6 +81,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios@0.20.0/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.4/qs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
