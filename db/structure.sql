@@ -68,6 +68,16 @@ CREATE TYPE public.mushroom_cap_surface AS ENUM (
 
 
 --
+-- Name: mushroom_category; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE public.mushroom_category AS ENUM (
+    'p',
+    'e'
+);
+
+
+--
 -- Name: mushroom_gill_attachment; Type: TYPE; Schema: public; Owner: -
 --
 
@@ -337,9 +347,10 @@ CREATE TABLE public.ar_internal_metadata (
 
 CREATE TABLE public.mushrooms (
     id uuid DEFAULT public.gen_random_uuid() NOT NULL,
-    brushes boolean,
+    bruises boolean,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
+    category public.mushroom_category,
     cap_shape public.mushroom_cap_shape,
     cap_surface public.mushroom_cap_surface,
     cap_color public.mushroom_cap_color,
@@ -416,6 +427,13 @@ CREATE INDEX index_mushrooms_on_cap_shape ON public.mushrooms USING btree (cap_s
 --
 
 CREATE INDEX index_mushrooms_on_cap_surface ON public.mushrooms USING btree (cap_surface);
+
+
+--
+-- Name: index_mushrooms_on_category; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_mushrooms_on_category ON public.mushrooms USING btree (category);
 
 
 --

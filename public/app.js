@@ -17,6 +17,8 @@ new Vue({
     options: {},
     values: [],
     hashedValues: {
+      "EdibleCategory": {"category": "edible"},
+      "PoisonousCategory": {"category": "poisonous"},
       "BellCapShape": {"capShape": "bell"},
       "ConicalCapShape": {"capShape": "conical"},
       "ConvexCapShape": {"capShape": "convex"},
@@ -46,6 +48,8 @@ new Vue({
       "NoneOdor": {"odor": "none"},
       "PungentOdor": {"odor": "pungent"},
       "SpicyOdor": {"odor": "spicy"},
+      "Bruises": {"bruises": true},
+      "NoBruises": {"bruises": false},
       "AttachedGillAttachment": {"gillAttachment": "attached"},
       "DescendingGillAttachment": {"gillAttachment": "descending"},
       "FreeGillAttachment": {"gillAttachment": "free"},
@@ -141,12 +145,14 @@ new Vue({
       "UrbanHabitat": {"habitat": "urban"},
       "WasteHabitat": {"habitat": "waste"},
       "WoodsHabitat": {"habitat": "woods"}
-    } ,
+    },
     headers: [
+      { text: 'Category', value: 'category' },
       { text: 'Cap Shape', value: 'capShape' },
       { text: 'Cap Surface', value: 'capSurface' },
       { text: 'Cap Color', value: 'capColor' },
       { text: 'Odor', value: 'odor' },
+      { text: 'Bruises', value: 'bruises' },
       { text: 'Gill Attachment', value: 'gillAttachment' },
       { text: 'Gill Spacing', value: 'gillSpacing' },
       { text: 'Gill Size', value: 'gillSize' },
@@ -166,6 +172,10 @@ new Vue({
       { text: 'habitat', value: 'habitat' }
     ],
     items: [
+      "Bruises",
+      "No Bruises",
+      "Edible Category",
+      "Poisonous Category",
       "Bell Cap Shape",
       "Conical Cap Shape",
       "Convex Cap Shape",
@@ -294,38 +304,55 @@ new Vue({
   },
   mounted () {
     this.selectedHeaders = [...this.headers]
-    this.getMushrooms()
+    this.debouncedGetMushrooms(this, { mushroom: { capShape: '' }})
   },
   watch: {
     values(newValue, oldValue) {
+      this.selected = newValue
+      this.debouncedGetMushrooms(this, newValue, oldValue)
     },     
     selected() {
       this.search = ''
     },
     options: {
       handler() {
-        this.getMushrooms()
+        this.debouncedGetMushrooms(this, this.selected)
       },
       deep: true,
     },
   },
   methods: {
+    debouncedGetMushrooms: _.debounce((self, newValue, oldValue) => {
+      params = self.parseParams()
+      self.getMushrooms(self, params)
+    }, 500),
     remove(item) {
       const index = this.values.indexOf(item)
       if (index >= 0) this.values.splice(index, 1)
     },
-    getMushrooms() {
-      let self = this
+    parseParams() {
+      if (!this.selected[0])
+        return { mushroom: { capShape: '' }}
+
+      mushroomObject = { mushroom: {} }
+      this.selected.forEach((item) => {
+        key = item.split(" ").join("")
+        hashedValue = this.hashedValues[key]
+        mushroomObject = { mushroom: Object.assign({}, mushroomObject.mushroom, hashedValue) }
+      }) 
+      return mushroomObject
+    },
+    getMushrooms(self, params) {
       self.loading = true
       return axios.get("/mushrooms", { 
         headers: { 
           'Accept': 'application/vnd.toad.v1+json', 
         },
-        params: { mushroom: { capShape: '' } }
+        params: params
       })
-        .then((data) => {
-          self.mushrooms = data.mushrooms
-          self.count = data.pagy.count
+        .then((response) => {
+          self.mushrooms = response.data.mushrooms
+          self.count = response.data.pagy.count
           self.loading = false
         })
         .catch((err) => {

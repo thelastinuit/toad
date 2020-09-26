@@ -10,10 +10,12 @@ describe 'Mushrooms API', type: :request, swagger_doc: 'v1/swagger.yaml' do
       parameter name: :mushroom, in: :formData, schema: {
         type: :object,
         properties: {
+          category: { type: :string, enum: Mushroom.categories.keys },
           capShape: { type: :string, enum: Mushroom.cap_shapes.keys },
           capSurface: { type: :string, enum: Mushroom.cap_surfaces.keys },
           capColor: { type: :string, enum: Mushroom.cap_colors.keys },
           odor: { type: :string, enum: Mushroom.odors.keys },
+          bruises: { type: :boolean },
           gillAttachment: { type: :string, enum: Mushroom.gill_attachments.keys },
           gillSpacing: { type: :string, enum: Mushroom.gill_spacings.keys },
           gillSize: { type: :string, enum: Mushroom.gill_sizes.keys },
@@ -37,10 +39,12 @@ describe 'Mushrooms API', type: :request, swagger_doc: 'v1/swagger.yaml' do
         examples 'application/json' => {
           mushrooms: [
             {
+              category: 'category',
               capShape: 'bell',
               capSurface: 'scaly',
               capColor: 'brown',
               odor: 'anise',
+              bruises: 'bruises',
               gillAttachment: 'attached',
               gillSpacing: 'close',
               gillSize: 'narrow',
