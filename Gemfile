@@ -18,7 +18,6 @@ group :development, :test do
 end
 
 group :development do
-  gem 'foreman'
   gem 'listen', '~> 3.2'
   gem 'spring'
 end
