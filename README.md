@@ -1,24 +1,13 @@
-# README
+# TOAD
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple demo of how to create PosgreSQL types.
 
-Things you may want to cover:
+## Setup
+This is a very common rails project, nothing out of the ordinary.
 
-* Ruby version
+1. Download the repo.
+2. Install gems.
+3. Setup database include seeds.
+4. Use foreman to run the rails application.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Happy coding.
